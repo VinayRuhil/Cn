@@ -1,0 +1,45 @@
+*Initial Router configuration*
+
+
+Router>enable
+Router#configure terminal
+Router(config)#hostname Cust
+Cust(config)#enable password cisco
+Cust(config)#enable secret cisco123
+Cust(config)#line console 0
+Cust(config-line)#password cisco123
+Cust(config-line)#login
+Cust(config-line)#exit
+Cust(config)#
+Cust(config)#line vty 0 4
+Cust(config-line)#password cisco123
+Cust(config-line)#login
+Cust(config-line)#exit
+Cust(config)#
+Cust(config)#service password-encryption
+Cust(config)#banner motd $Authorized Access Only!$
+Cust(config-line)#exit
+
+
+*Initial Switch configuration*
+
+Switch>enable
+Switch#configure terminal
+Switch(config)#hostname Cust
+Cust(config)#enable password cisco
+Cust(config)#enable secret cisco
+Cust(config)#line console 0
+Cust(config-line)#password cisco
+Cust(config-line)#login
+Cust(config-line)#exit
+Cust(config)#line vty 0 15
+Cust(config-line)#password cisco
+Cust(config-line)#login
+Cust(config-line)#exit
+Cust(config)#interface vlan 1
+Cust(config-if)#ip address 192.168.1.5 255.255.255.0
+Cust(config-if)#no shutdown
+Cust(config-if)#exit
+Cust(config)#ip default-gateway 192.168.1.1
+Cust(config)#end
+Cust#ping 209.165.201.10
